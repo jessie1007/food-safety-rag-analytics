@@ -1,5 +1,6 @@
 import streamlit as st
 from backend import ask
+import plotly.express as px
 # Set the title for the Streamlit app
 st.title("Boston Food Safety Intelligence Assistant 🍲 ")
 
@@ -18,6 +19,10 @@ if st.button("Analyze"):
     if result["type"] == "sql":
         st.subheader("Results")
         st.dataframe(result["data"])
+
+        if result.get("fig") is not None:
+            st.subheader("Chart")
+            st.plotly_chart(result["fig"], use_container_width=True)
 
         # call chart based on route
 
